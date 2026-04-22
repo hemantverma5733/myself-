@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Hemant Verma</title>
+    <!-- Modern Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --sidebar-bg: rgba(15, 23, 42, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%);
+            color: var(--text-primary);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Architecture - Creating the "page inside a page" effect */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar-bg);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            box-shadow: 4px 0 15px rgba(0,0,0,0.2);
+        }
+
+        .sidebar h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--accent-primary);
+            border-left: 4px solid var(--accent-primary);
+        }
+
+        /* Main Context Hub */
+        .main-content {
+            flex: 1;
+            padding: 3rem 4rem;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .page-header {
+            margin-bottom: 2.5rem;
+            animation: fadeInDown 0.6s ease;
+        }
+        
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Message Cards Grid */
+        .messages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .msg-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.8rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            position: relative;
+        }
+
+        .msg-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .msg-name {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #e2e8f0;
+            margin-bottom: 0.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .msg-name::before {
+            content: "👤";
+            font-size: 1rem;
+        }
+
+        .msg-email {
+            font-size: 0.95rem;
+            color: var(--accent-primary);
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .msg-email:hover {
+            text-decoration: underline;
+        }
+
+        .msg-text {
+            color: #cbd5e1;
+            line-height: 1.6;
+            background: rgba(0,0,0,0.3);
+            padding: 1.2rem;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            border-left: 3px solid var(--accent-secondary);
+        }
+
+        .msg-time {
+            position: absolute;
+            top: 1.8rem;
+            right: 1.8rem;
+            font-size: 0.8rem;
+            color: #64748b;
+            background: rgba(255,255,255,0.05);
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+
+        /* Loaders and Empty States */
+        .loader {
+            color: var(--accent-primary);
+            font-style: italic;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 5rem 0;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Layout -->
+    <div class="sidebar">
+        <h2>Admin Panel</h2>
+        <div class="nav-links">
+            <a class="nav-link" id="nav-dashboard" onclick="switchTab('dashboard')">🏠 Dashboard</a>
+            <a class="nav-link active" id="nav-messages" onclick="switchTab('messages')">✉️ Messages Inbox</a>
+            <a class="nav-link" href="http://localhost:3000/myself.html" style="margin-top: auto; justify-content: center; background: rgba(59, 130, 246, 0.2); border: 1px solid var(--accent-primary);">🌐 Go to Main Site</a>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        
+        <!-- Dashboard Tab -->
+        <div id="tab-dashboard" style="display: none;">
+            <div class="page-header">
+                <h1>Welcome Back!</h1>
+                <p>This is your private dashboard. Select 'Messages Inbox' from the sidebar to view user queries.</p>
+            </div>
+            
+            <div class="msg-card" style="max-width: 500px;">
+                <h3>System Status</h3>
+                <p style="color: #4ade80; margin-top: 10px;">🟢 Backend Server is Active</p>
+                <p style="color: #4ade80; margin-top: 10px;">🟢 SQLite Database is Connected</p>
+            </div>
+        </div>
+
+        <!-- Messages Tab -->
+        <div id="tab-messages">
+            <div class="page-header">
+                <h1>Messages Inbox</h1>
+                <p>Read what people have submitted on your portfolio's contact form.</p>
+            </div>
+            
+            <div id="loading" class="loader">Fetching messages from database...</div>
+            <div class="messages-grid" id="messagesGrid"></div>
+        </div>
+
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            document.getElementById('tab-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
+            document.getElementById('tab-messages').style.display = tab === 'messages' ? 'block' : 'none';
+            
+            document.getElementById('nav-dashboard').classList.toggle('active', tab === 'dashboard');
+            document.getElementById('nav-messages').classList.toggle('active', tab === 'messages');
+        }
+
+        async function fetchMessages() {
+            const grid = document.getElementById('messagesGrid');
+            const loader = document.getElementById('loading');
+            grid.innerHTML = '';
+            loader.style.display = 'block';
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/messages');
+                const result = await response.json();
+                
+                loader.style.display = 'none';
+
+                if (result.success && result.data.length > 0) {
+                    result.data.forEach(msg => {
+                        // Assume UTC timestamp from sqlite DEFAULT CURRENT_TIMESTAMP
+                        const date = new Date(msg.timestamp + 'Z');
+                        const card = `<div class="msg-card">
+                            <span class="msg-time">${date.toLocaleDateString()} ${date.toLocaleTimeString()}</span>
+                            <div class="msg-name">${msg.name}</div>
+                            <a href="mailto:${msg.email}" class="msg-email">${msg.email}</a>
+                            <div class="msg-text">${msg.message}</div>
+                        </div>`;
+                        grid.innerHTML += card;
+                    });
+                } else {
+                    grid.innerHTML = `<div class="empty-state">Inbox is empty. No messages yet!</div>`;
+                }
+            } catch (error) {
+                loader.style.display = 'none';
+                grid.innerHTML = `<div class="empty-state" style="color: #f87171;">Failed to load messages. Make sure backend is running.</div>`;
+                console.error(error);
+            }
+        }
+
+        // Initialize fetching on page load
+        fetchMessages();
+    </script>
+</body>
+</html>

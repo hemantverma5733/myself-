@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemant Verma | Contact</title>
+    <!-- Modern Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+    <a href="myself.html">About</a>
+    <a href="skills.html">Skills</a>
+    <a href="projects.html">Projects</a>
+    <a href="certifications.html">Certifications</a>
+    <a href="contact.html" class="active">Contact</a>
+</nav>
+
+<section id="contact">
+    <div class="card" style="margin-top: 4rem;">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-details">
+            <a href="mailto:hemantverma5733@gmail.com" class="contact-item" style="text-decoration: none; margin-bottom: 2rem;">
+                <span>✉</span> hemantverma5733@gmail.com
+            </a>
+            
+            <form id="contactForm" class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">Send Message</button>
+                <div id="formStatus" class="form-status"></div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const submitBtn = document.getElementById('submitBtn');
+        const statusDiv = document.getElementById('formStatus');
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        
+        // Disable button while sending
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        statusDiv.textContent = '';
+        statusDiv.className = 'form-status';
+        
+        try {
+            const response = await fetch('http://localhost:3000/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ name, email, message })
+            });
+
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                statusDiv.textContent = 'Message sent successfully!';
+                statusDiv.classList.add('status-success');
+                // Reset form
+                document.getElementById('contactForm').reset();
+            } else {
+                statusDiv.textContent = data.error || 'Failed to send message.';
+                statusDiv.classList.add('status-error');
+            }
+        } catch (error) {
+            statusDiv.textContent = 'Network error. Please try again later.';
+            statusDiv.classList.add('status-error');
+            console.error('Error:', error);
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send Message';
+        }
+    });
+</script>
+
+<footer>
+    <p>© 2026 Hemant Verma. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

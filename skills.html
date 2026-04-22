@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemant Verma | Skills</title>
+    <!-- Modern Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-name {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .skill-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        .download-btn {
+            margin-top: auto;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            color: #93c5fd;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            transition: background 0.3s ease;
+        }
+        
+        .skill-card:hover .download-btn {
+            background: rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="myself.html">About</a>
+    <a href="skills.html" class="active">Skills</a>
+    <a href="projects.html">Projects</a>
+    <a href="certifications.html">Certifications</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<section id="skills">
+    <div class="card" style="margin-top: 4rem;">
+        <h2 class="section-title">My Skills</h2>
+        <p style="margin-bottom: 3rem;">Technologies and programming languages I've worked with. Click on a card to download the reference sheet.</p>
+        
+        <div class="skills-grid">
+            <a href="https://www.math.brown.edu/jhs/ReferenceCards/CRefCard.v2.2.pdf" target="_blank" class="skill-card">
+                <div class="skill-icon">Ⓒ</div>
+                <div class="skill-name">C Programming</div>
+                <p>System programming, memory management, algorithms</p>
+                <div class="download-btn">View Cheatsheet 📄</div>
+            </a>
+            
+            <a href="https://introcs.cs.princeton.edu/java/11cheatsheet/JavaCheatSheet.pdf" target="_blank" class="skill-card">
+                <div class="skill-icon">☕</div>
+                <div class="skill-name">Java</div>
+                <p>Object-oriented programming, backend development</p>
+                <div class="download-btn">View Cheatsheet 📄</div>
+            </a>
+            
+            <a href="https://websitesetup.org/wp-content/uploads/css3-cheat-sheet.pdf" target="_blank" class="skill-card">
+                <div class="skill-icon">🎨</div>
+                <div class="skill-name">HTML & CSS</div>
+                <p>Responsive web design, modern UI/UX layouts</p>
+                <div class="download-btn">View Cheatsheet 📄</div>
+            </a>
+            
+            <a href="https://websitesetup.org/wp-content/uploads/2020/09/Javascript-Cheat-Sheet.pdf" target="_blank" class="skill-card">
+                <div class="skill-icon">⚡</div>
+                <div class="skill-name">JavaScript</div>
+                <p>Dynamic interfaces, DOM manipulation, asynchronous logic</p>
+                <div class="download-btn">View Cheatsheet 📄</div>
+            </a>
+            
+            <a href="https://websitesetup.org/wp-content/uploads/2020/09/Python-Cheat-Sheet.pdf" target="_blank" class="skill-card">
+                <div class="skill-icon">🐍</div>
+                <div class="skill-name">Python</div>
+                <p>Data analysis, scripting, versatile applications</p>
+                <div class="download-btn">View Cheatsheet 📄</div>
+            </a>
+            
+            <a href="https://websitesetup.org/wp-content/uploads/2020/09/SQL-Cheat-Sheet.pdf" target="_blank" class="skill-card">
+                <div class="skill-icon">🗄️</div>
+                <div class="skill-name">DBMS (SQL)</div>
+                <p>Relational databases, queries, data modeling</p>
+                <div class="download-btn">View Cheatsheet 📄</div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Hemant Verma. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

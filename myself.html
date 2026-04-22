@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemant Verma | Personal Website</title>
+    <!-- Modern Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav>
+    <a href="myself.html" class="active">About</a>
+    <a href="skills.html">Skills</a>
+    <a href="projects.html">Projects</a>
+    <a href="certifications.html">Certifications</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<header>
+    <img src="1000_F_794810654_oUwrtZ9JO16rPN93lbAguU72lto7QVJ9.jpg" alt="Hemant Verma" class="profile-img">
+    <h1>Hemant Verma</h1>
+    <p>Student • Developer • Learner</p>
+</header>
+
+<section id="about">
+    <div class="card">
+        <h2 class="section-title">About Me</h2>
+        <p>
+            Hello! I am Hemant Verma, a B.Tech Information Technology student. I am passionate about coding and exploring the endless possibilities of technology. I am someone who loves building efficient, modern applications and continuously learning new skills.
+        </p>
+        <div style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
+            <h3 style="color: var(--text-primary); margin-bottom: 1.5rem; text-align: center; font-size: 1.5rem;">Academic Results (RTU)</h3>
+            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+                <div style="background: rgba(255,255,255,0.02); padding: 1.5rem 2.5rem; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s ease;">
+                    <h4 style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 600;">1st Semester</h4>
+                    <p style="color: var(--accent-primary); font-size: 1.8rem; font-weight: 800; margin: 0;">7.6 <span style="font-size: 1rem; color: var(--text-secondary); font-weight: 400;">CGPA</span></p>
+                </div>
+                <a href="#" onclick="openPasswordModal(event)" style="text-decoration: none; color: inherit; display: block;">
+                    <div style="background: rgba(255,255,255,0.02); padding: 1.5rem 2.5rem; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 10px 20px rgba(59, 130, 246, 0.2)'; this.style.borderColor='rgba(59, 130, 246, 0.3)';" onmouseout="this.style.transform='none'; this.style.boxShadow='none'; this.style.borderColor='rgba(255,255,255,0.05)';">
+                        <h4 style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 600;">2nd Semester</h4>
+                        <p style="color: var(--accent-primary); font-size: 1.8rem; font-weight: 800; margin: 0;">7.17 <span style="font-size: 1rem; color: var(--text-secondary); font-weight: 400;">CGPA</span></p>
+                        <p style="color: #93c5fd; font-size: 0.85rem; margin-top: 1rem; background: rgba(59, 130, 246, 0.1); padding: 0.4rem 1rem; border-radius: 50px; display: inline-block;">View Marksheet 📄</p>
+                    </div>
+                </a>
+                <div style="background: rgba(255,255,255,0.02); padding: 1.5rem 2.5rem; border-radius: 16px; text-align: center; border: 1px dashed rgba(255,255,255,0.2); opacity: 0.8;">
+                    <h4 style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: 600;">3rd Semester</h4>
+                    <p style="color: var(--text-secondary); font-size: 1.2rem; font-weight: 500; margin: 0; font-style: italic; margin-top: 0.5rem;">Coming Soon ⏳</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 Hemant Verma. All rights reserved.</p>
+</footer>
+
+<!-- Password Modal -->
+<div id="passwordModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 2000; align-items: center; justify-content: center;">
+    <div style="background: var(--card-bg); padding: 2.5rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); text-align: center; width: 90%; max-width: 400px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); animation: fadeInUp 0.3s ease-out;">
+        <h3 style="margin-bottom: 1rem; color: var(--text-primary); font-size: 1.5rem;">Protected File 🔒</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem;">Please enter password to view 2nd Semester marksheet.</p>
+        <input type="password" id="marksheetPassword" placeholder="Enter Password" style="width: 100%; padding: 1rem; margin-bottom: 1.5rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; font-family: inherit; outline: none; font-size: 1rem; transition: border-color 0.3s;">
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+            <button onclick="closeModal()" style="padding: 0.8rem 1.5rem; border: none; border-radius: 12px; background: rgba(255,255,255,0.05); color: white; cursor: pointer; transition: 0.3s; font-weight: 600; flex: 1;">Cancel</button>
+            <button onclick="verifyPassword()" style="padding: 0.8rem 1.5rem; border: none; border-radius: 12px; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); color: white; cursor: pointer; transition: 0.3s; font-weight: 600; flex: 1;">Submit</button>
+        </div>
+        <p id="passwordError" style="color: #f87171; font-size: 0.9rem; margin-top: 1rem; display: none;">Incorrect password. Try again.</p>
+    </div>
+</div>
+
+<script>
+    function openPasswordModal(e) {
+        e.preventDefault();
+        document.getElementById('passwordModal').style.display = 'flex';
+        document.getElementById('passwordError').style.display = 'none';
+        document.getElementById('marksheetPassword').value = '';
+        setTimeout(() => document.getElementById('marksheetPassword').focus(), 100);
+    }
+
+    function closeModal() {
+        document.getElementById('passwordModal').style.display = 'none';
+    }
+
+    function verifyPassword() {
+        const pass = document.getElementById('marksheetPassword').value;
+        if (pass === "Hemant@2004") {
+            closeModal();
+            window.open("2nd_sem_marksheet.png", "_blank");
+        } else {
+            document.getElementById('passwordError').style.display = 'block';
+            document.getElementById('marksheetPassword').style.borderColor = '#f87171';
+        }
+    }
+    
+    document.getElementById('marksheetPassword').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            verifyPassword();
+        }
+    });
+
+    document.getElementById('marksheetPassword').addEventListener('input', function(e) {
+        document.getElementById('marksheetPassword').style.borderColor = 'rgba(255,255,255,0.1)';
+        document.getElementById('passwordError').style.display = 'none';
+    });
+</script>
+</body>
+</html>
